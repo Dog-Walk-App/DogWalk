@@ -1,0 +1,121 @@
+# Archivos y carpetas específicos de .NET
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
+orleans.codegen.cs
+
+# Archivos de compilación
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Archivos de Visual Studio
+.vs/
+.vscode/
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Archivos de ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Archivos de pruebas
+TestResults/
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NuGet
+*.nupkg
+# Los archivos de paquetes pueden ser ignorados si se está utilizando NuGet Restore
+**/[Pp]ackages/*
+# excepto build/, que se usa como destino de MSBuild
+!**/[Pp]ackages/build/
+# Descomente si es necesario, pero generalmente se regenerará cuando sea necesario
+#!**/[Pp]ackages/repositories.config
+# Los archivos project.json de NuGet v3 producen más archivos ignorables
+*.nuget.props
+*.nuget.targets
+
+# Archivos de Microsoft Azure
+csx/
+*.build.csdef
+ecf/
+rcf/
+
+# Archivos de aplicación
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+appsettings.*.json
+
+# Archivos de secretos
+*.secret
+secrets.json
+local.settings.json
+
+# Archivos de base de datos
+*.mdf
+*.ldf
+*.ndf
+
+# Archivos de caché
+.sass-cache/
+.npm/
+.eslintcache
+.stylelintcache
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Archivos temporales
+*.swp
+*~
