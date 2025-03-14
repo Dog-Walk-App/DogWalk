@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: dogwalk-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=DogWalk_P@ssw0rd
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - dogwalk-sqlserver-data:/var/opt/mssql
+    networks:
+      - dogwalk-network
+
+networks:
+  dogwalk-network:
+    driver: bridge
+
+volumes:
+  dogwalk-sqlserver-data: 

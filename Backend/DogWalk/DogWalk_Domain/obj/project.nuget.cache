@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "jWjtn38G1kg=",
+  "dgSpecHash": "7l0Ii1qIWQg=",
   "success": true,
   "projectFilePath": "D:\\2_DAW\\PROYECTO_FINAL\\DogWalk\\Backend\\DogWalk\\DogWalk_Domain\\DogWalk_Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Albert\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
+    "C:\\Users\\Albert\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\Albert\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
