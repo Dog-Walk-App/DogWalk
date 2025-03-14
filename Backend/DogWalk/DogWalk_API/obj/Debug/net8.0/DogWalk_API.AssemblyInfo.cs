@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DogWalk_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7da8708e7e8d0dd9e017b1811289711b3a2ca348")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f4fa20ad5f90e4bb06f758355d7ac7b3da826bd")]
 [assembly: System.Reflection.AssemblyProductAttribute("DogWalk_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DogWalk_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

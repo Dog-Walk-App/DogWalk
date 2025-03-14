@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using DogWalk_Domain.Enums;
 
 namespace DogWalk_Application.DTOs
@@ -18,6 +20,20 @@ namespace DogWalk_Application.DTOs
         public string NombreServicio { get; set; } = string.Empty;
         public string NombrePerro { get; set; } = string.Empty;
         public DateTime FechaHoraServicio { get; set; }
+        public decimal Precio { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFin { get; set; }
+        public string DireccionRecogida { get; set; }
+        public List<MascotaReservaDto> Mascotas { get; set; } = new List<MascotaReservaDto>();
+        public string Comentarios { get; set; }
+        public int? Valoracion { get; set; }
+        public string ComentarioValoracion { get; set; }
+    }
+
+    public class MascotaReservaDto
+    {
+        public int MascotaId { get; set; }
+        public string Nombre { get; set; }
     }
 
     public class ReservaCreateDto
@@ -28,11 +44,33 @@ namespace DogWalk_Application.DTOs
         public int PerroId { get; set; }
         public int HorarioId { get; set; }
         public DateTime FechaReserva { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFin { get; set; }
+        public string DireccionRecogida { get; set; }
+        public List<int> MascotasIds { get; set; } = new List<int>();
+        public string Comentarios { get; set; }
     }
 
     public class ReservaUpdateDto
     {
         public ReservaStatus Estado { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFin { get; set; }
+        public string DireccionRecogida { get; set; }
+        public List<int> MascotasIds { get; set; } = new List<int>();
+        public string Comentarios { get; set; }
+    }
+
+    public class CambiarEstadoReservaDto
+    {
+        public string Estado { get; set; }
+        public string Motivo { get; set; }
+    }
+
+    public class ValoracionReservaDto
+    {
+        public int Valoracion { get; set; }
+        public string Comentario { get; set; }
     }
 
     public class ReservaDetailDto : ReservaDto
