@@ -13,5 +13,6 @@ namespace DogWalk_Domain.Repositories
         void Remove(T entity);
         void RemoveRange(IEnumerable<T> entities);
         Task<int> SaveChangesAsync();
+        Task DeleteAsync(T entity);
     }
 } 

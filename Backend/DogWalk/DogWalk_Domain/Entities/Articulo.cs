@@ -9,6 +9,8 @@ namespace DogWalk_Domain.Entities
         public string? Descripcion { get; set; }
         public decimal Precio { get; set; }
         public int Stock { get; set; }
+        public string Categoria { get; set; } = string.Empty;
+        public string? ImagenPrincipal { get; set; }
 
         // Relaciones
         public ICollection<ImagenArticulo> Imagenes { get; set; } = new List<ImagenArticulo>();

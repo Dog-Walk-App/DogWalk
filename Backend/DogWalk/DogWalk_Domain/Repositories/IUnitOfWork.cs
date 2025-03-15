@@ -9,10 +9,12 @@ namespace DogWalk_Domain.Repositories
         IReservaRepository Reservas { get; }
         IArticuloRepository Articulos { get; }
         ICarritoRepository Carritos { get; }
+        IItemCarritoRepository ItemsCarrito { get; }
         IFacturaRepository Facturas { get; }
         IChatRepository Chats { get; }
         IRankingRepository Rankings { get; }
         IOpinionRepository Opiniones { get; }
+        IHorarioRepository Horarios { get; }
 
         Task<int> SaveChangesAsync();
     }

@@ -7,7 +7,9 @@ namespace DogWalk_Domain.Repositories
     {
         Task<IEnumerable<Reserva>> GetReservasByUsuarioIdAsync(int usuarioId);
         Task<IEnumerable<Reserva>> GetReservasByPaseadorIdAsync(int paseadorId);
+        Task<IEnumerable<Reserva>> GetReservasByPerroIdAsync(int perroId);
         Task<IEnumerable<Reserva>> GetReservasByEstadoAsync(ReservaStatus estado);
         Task<IEnumerable<Reserva>> GetReservasByFechaAsync(DateTime fecha);
+        Task<IEnumerable<Reserva>> GetReservasCompletadasByUsuarioAndPaseadorAsync(int usuarioId, int paseadorId);
     }
 } 

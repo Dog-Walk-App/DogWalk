@@ -3,6 +3,7 @@ namespace DogWalk_Domain.Enums
     public enum DisponibilidadStatus
     {
         Disponible,
-        Reservado
+        Reservado,
+        NoDisponible
     }
 } 

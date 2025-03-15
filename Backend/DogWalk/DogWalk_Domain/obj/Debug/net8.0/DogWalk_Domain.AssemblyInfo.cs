@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DogWalk_Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f4fa20ad5f90e4bb06f758355d7ac7b3da826bd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+894ca05080ea7c0162c50d2cd933a0b6e368221d")]
 [assembly: System.Reflection.AssemblyProductAttribute("DogWalk_Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DogWalk_Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
