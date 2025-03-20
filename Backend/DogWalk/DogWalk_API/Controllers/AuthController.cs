@@ -166,10 +166,12 @@ namespace DogWalk_API.Controllers
         {
             try
             {
+                _logger.LogInformation("Iniciando registro de usuario con email: {Email}", usuarioDto?.Email);
 
                 // Validar el DTO
                 if (usuarioDto == null)
                 {
+                    _logger.LogWarning("UsuarioCreateDto es null");
                     return BadRequest("Los datos de registro son requeridos");
                 }
 
@@ -177,9 +179,11 @@ namespace DogWalk_API.Controllers
                 var existingUsuario = await _unitOfWork.Usuarios.GetByEmailAsync(usuarioDto.Email);
                 if (existingUsuario != null)
                 {
+                    _logger.LogWarning("Ya existe un usuario con este email: {Email}", usuarioDto.Email);
                     return BadRequest("Ya existe un usuario con este email");
                 }
 
+                // Validar email
                 Email email;
                 try
                 {
@@ -187,49 +191,68 @@ namespace DogWalk_API.Controllers
                 }
                 catch (ArgumentException ex)
                 {
+                    _logger.LogWarning("Email inválido: {Email}, Error: {Message}", usuarioDto.Email, ex.Message);
                     return BadRequest(ex.Message);
                 }
 
+                // Validar contraseña
                 if (string.IsNullOrWhiteSpace(usuarioDto.Password))
                 {
-                    return BadRequest("La contraseña no puede estar vacía");
+                    _logger.LogWarning("Contraseña vacía");
+                    return BadRequest("La contraseña es requerida");
                 }
 
                 if (usuarioDto.Password.Length < 6)
                 {
+                    _logger.LogWarning("Contraseña demasiado corta");
                     return BadRequest("La contraseña debe tener al menos 6 caracteres");
                 }
 
-                var hashedPassword = BCrypt.Net.BCrypt.HashPassword(usuarioDto.Password);
-
+                // Crear el usuario
                 var usuario = new Usuario
                 {
                     RolId = 2, // Rol de Cliente por defecto
                     Email = email,
-                    Password = hashedPassword,
+                    Password = BCrypt.Net.BCrypt.HashPassword(usuarioDto.Password),
+                    Nombre = string.Empty,
+                    Apellido = string.Empty,
+                    Direccion = string.Empty,
+                    Dni = Dni.Create("00000000A"), // Valor por defecto
+                    Telefono = Telefono.Create("000000000") // Valor por defecto
                 };
 
-                await _unitOfWork.Usuarios.AddAsync(usuario);
-                await _unitOfWork.SaveChangesAsync();
-
-                var token = GenerateJwtToken(usuario.Id.ToString(), usuario.Email.Value, "Cliente");
-                var refreshToken = GenerateRefreshToken();
-
-                var response = new AuthResponseDto
+                try
                 {
-                    Token = token,
-                    RefreshToken = refreshToken,
-                    Expiration = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:DurationInMinutes"] ?? "60")),
-                    UserId = usuario.Id,
-                    UserName = usuario.Email.Value,
-                    Email = usuario.Email.Value,
-                    Role = "Cliente"
-                };
+                    _logger.LogInformation("Guardando nuevo usuario en la base de datos");
+                    await _unitOfWork.Usuarios.AddAsync(usuario);
+                    await _unitOfWork.SaveChangesAsync();
 
-                return Ok(response);
+                    var token = GenerateJwtToken(usuario.Id.ToString(), usuario.Email.Value, "Cliente");
+                    var refreshToken = GenerateRefreshToken();
+
+                    var response = new AuthResponseDto
+                    {
+                        Token = token,
+                        RefreshToken = refreshToken,
+                        Expiration = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:DurationInMinutes"] ?? "60")),
+                        UserId = usuario.Id,
+                        UserName = usuario.Email.Value,
+                        Email = usuario.Email.Value,
+                        Role = "Cliente"
+                    };
+
+                    _logger.LogInformation("Usuario registrado exitosamente: {Email}", usuario.Email.Value);
+                    return Ok(response);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error al guardar el usuario en la base de datos: {Message}", ex.Message);
+                    return StatusCode(500, new { message = "Error al guardar el usuario", error = ex.Message });
+                }
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error no manejado durante el registro: {Message}", ex.Message);
                 return StatusCode(500, new { message = "Error interno del servidor", error = ex.Message });
             }
         }
