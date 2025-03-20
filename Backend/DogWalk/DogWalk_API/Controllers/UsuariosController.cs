@@ -105,30 +105,17 @@ namespace DogWalk_API.Controllers
                     return BadRequest("Ya existe un usuario con este email");
                 }
 
-                // Verificar si ya existe un usuario con el mismo DNI
-                var existingUsuarios = await _unitOfWork.Usuarios.FindAsync(u => u.Dni.Value == usuarioDto.Dni);
-                if (existingUsuarios.Any())
-                {
-                    return BadRequest("Ya existe un usuario con este DNI");
-                }
+               
 
                 // Crear el objeto de dominio
                 var email = Email.Create(usuarioDto.Email);
-                var dni = Dni.Create(usuarioDto.Dni);
-                var telefono = Telefono.Create(usuarioDto.Telefono);
                 var hashedPassword = BCrypt.Net.BCrypt.HashPassword(usuarioDto.Password);
 
                 var usuario = new Usuario
                 {
                     RolId = 2, // Rol de Cliente por defecto
-                    Dni = dni,
-                    Nombre = usuarioDto.Nombre,
-                    Apellido = usuarioDto.Apellido,
-                    Direccion = usuarioDto.Direccion,
                     Email = email,
                     Password = hashedPassword,
-                    Telefono = telefono,
-                    FotoPerfil = usuarioDto.FotoPerfil
                 };
 
                 await _unitOfWork.Usuarios.AddAsync(usuario);

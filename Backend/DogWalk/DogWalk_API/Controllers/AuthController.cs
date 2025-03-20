@@ -166,6 +166,13 @@ namespace DogWalk_API.Controllers
         {
             try
             {
+
+                // Validar el DTO
+                if (usuarioDto == null)
+                {
+                    return BadRequest("Los datos de registro son requeridos");
+                }
+
                 // Verificar si ya existe un usuario con el mismo email
                 var existingUsuario = await _unitOfWork.Usuarios.GetByEmailAsync(usuarioDto.Email);
                 if (existingUsuario != null)
@@ -173,54 +180,57 @@ namespace DogWalk_API.Controllers
                     return BadRequest("Ya existe un usuario con este email");
                 }
 
-                // Verificar si ya existe un usuario con el mismo DNI
-                var existingUsuarios = await _unitOfWork.Usuarios.FindAsync(u => u.Dni.Value == usuarioDto.Dni);
-                if (existingUsuarios.Any())
+                Email email;
+                try
                 {
-                    return BadRequest("Ya existe un usuario con este DNI");
+                    email = Email.Create(usuarioDto.Email);
+                }
+                catch (ArgumentException ex)
+                {
+                    return BadRequest(ex.Message);
                 }
 
-                // Crear el objeto de dominio
-                var email = Email.Create(usuarioDto.Email);
-                var dni = Dni.Create(usuarioDto.Dni);
-                var telefono = Telefono.Create(usuarioDto.Telefono);
+                if (string.IsNullOrWhiteSpace(usuarioDto.Password))
+                {
+                    return BadRequest("La contraseña no puede estar vacía");
+                }
+
+                if (usuarioDto.Password.Length < 6)
+                {
+                    return BadRequest("La contraseña debe tener al menos 6 caracteres");
+                }
+
                 var hashedPassword = BCrypt.Net.BCrypt.HashPassword(usuarioDto.Password);
 
                 var usuario = new Usuario
                 {
                     RolId = 2, // Rol de Cliente por defecto
-                    Dni = dni,
-                    Nombre = usuarioDto.Nombre,
-                    Apellido = usuarioDto.Apellido,
-                    Direccion = usuarioDto.Direccion,
                     Email = email,
                     Password = hashedPassword,
-                    Telefono = telefono,
-                    FotoPerfil = usuarioDto.FotoPerfil
                 };
 
                 await _unitOfWork.Usuarios.AddAsync(usuario);
                 await _unitOfWork.SaveChangesAsync();
 
-                // Generar token JWT y refresh token
                 var token = GenerateJwtToken(usuario.Id.ToString(), usuario.Email.Value, "Cliente");
                 var refreshToken = GenerateRefreshToken();
 
-                return Ok(new AuthResponseDto
+                var response = new AuthResponseDto
                 {
                     Token = token,
                     RefreshToken = refreshToken,
                     Expiration = DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["JwtSettings:DurationInMinutes"] ?? "60")),
                     UserId = usuario.Id,
-                    UserName = $"{usuario.Nombre} {usuario.Apellido}",
+                    UserName = usuario.Email.Value,
                     Email = usuario.Email.Value,
                     Role = "Cliente"
-                });
+                };
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error al registrar el usuario");
-                return StatusCode(500, "Error interno del servidor");
+                return StatusCode(500, new { message = "Error interno del servidor", error = ex.Message });
             }
         }
 

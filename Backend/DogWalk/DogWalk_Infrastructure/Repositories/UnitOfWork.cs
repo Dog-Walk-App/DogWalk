@@ -6,19 +6,19 @@ namespace DogWalk_Infrastructure.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly DogWalkDbContext _context;
-        private IUsuarioRepository _usuarios;
-        private IPaseadorRepository _paseadores;
-        private IPerroRepository _perros;
-        private IServicioRepository _servicios;
-        private IReservaRepository _reservas;
-        private IArticuloRepository _articulos;
-        private ICarritoRepository _carritos;
-        private IItemCarritoRepository _itemsCarrito;
-        private IFacturaRepository _facturas;
-        private IChatRepository _chats;
-        private IRankingRepository _rankings;
-        private IOpinionRepository _opiniones;
-        private IHorarioRepository _horarios;
+        private IUsuarioRepository? _usuarios;
+        private IPaseadorRepository? _paseadores;
+        private IPerroRepository? _perros;
+        private IServicioRepository? _servicios;
+        private IReservaRepository? _reservas;
+        private IArticuloRepository? _articulos;
+        private ICarritoRepository? _carritos;
+        private IItemCarritoRepository? _itemsCarrito;
+        private IFacturaRepository? _facturas;
+        private IChatRepository? _chats;
+        private IRankingRepository? _rankings;
+        private IOpinionRepository? _opiniones;
+        private IHorarioRepository? _horarios;
 
         public UnitOfWork(DogWalkDbContext context)
         {

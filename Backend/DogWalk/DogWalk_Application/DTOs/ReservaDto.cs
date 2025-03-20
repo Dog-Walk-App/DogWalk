@@ -46,9 +46,9 @@ namespace DogWalk_Application.DTOs
         public DateTime FechaReserva { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
-        public string DireccionRecogida { get; set; }
+        public string DireccionRecogida { get; set; } = string.Empty;
         public List<int> MascotasIds { get; set; } = new List<int>();
-        public string Comentarios { get; set; }
+        public string Comentarios { get; set; } = string.Empty;
     }
 
     public class ReservaUpdateDto
@@ -56,21 +56,21 @@ namespace DogWalk_Application.DTOs
         public ReservaStatus Estado { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
-        public string DireccionRecogida { get; set; }
+        public string DireccionRecogida { get; set; } = string.Empty;
         public List<int> MascotasIds { get; set; } = new List<int>();
-        public string Comentarios { get; set; }
+        public string Comentarios { get; set; } = string.Empty;
     }
 
     public class CambiarEstadoReservaDto
     {
-        public string Estado { get; set; }
-        public string Motivo { get; set; }
+        public string Estado { get; set; } = string.Empty;
+        public string Motivo { get; set; } = string.Empty;
     }
 
     public class ValoracionReservaDto
     {
         public int Valoracion { get; set; }
-        public string Comentario { get; set; }
+        public string Comentario { get; set; } = string.Empty;
     }
 
     public class ReservaDetailDto : ReservaDto

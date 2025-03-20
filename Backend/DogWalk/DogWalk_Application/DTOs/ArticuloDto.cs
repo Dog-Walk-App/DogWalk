@@ -37,6 +37,6 @@ namespace DogWalk_Application.DTOs
 
     public class ArticuloWithImagenesDto : ArticuloDto
     {
-        public List<ImagenArticuloDto> Imagenes { get; set; } = new List<ImagenArticuloDto>();
+        public new List<ImagenArticuloDto> Imagenes { get; set; } = new List<ImagenArticuloDto>();
     }
 } 
