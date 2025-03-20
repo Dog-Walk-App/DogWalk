@@ -71,27 +71,32 @@ namespace DogWalk_Infrastructure.Persistence
             modelBuilder.Entity<Reserva>()
                 .HasOne(r => r.Usuario)
                 .WithMany(u => u.Reservas)
-                .HasForeignKey(r => r.UsuarioId);
+                .HasForeignKey(r => r.UsuarioId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Reserva>()
                 .HasOne(r => r.Paseador)
                 .WithMany(p => p.Reservas)
-                .HasForeignKey(r => r.PaseadorId);
+                .HasForeignKey(r => r.PaseadorId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Reserva>()
                 .HasOne(r => r.Servicio)
                 .WithMany(s => s.Reservas)
-                .HasForeignKey(r => r.ServicioId);
+                .HasForeignKey(r => r.ServicioId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Reserva>()
                 .HasOne(r => r.Perro)
                 .WithMany(p => p.Reservas)
-                .HasForeignKey(r => r.PerroId);
+                .HasForeignKey(r => r.PerroId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Reserva>()
                 .HasOne(r => r.Horario)
                 .WithMany(h => h.Reservas)
-                .HasForeignKey(r => r.HorarioId);
+                .HasForeignKey(r => r.HorarioId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ImagenArticulo>()
                 .HasOne(i => i.Articulo)
@@ -141,12 +146,54 @@ namespace DogWalk_Infrastructure.Persistence
             modelBuilder.Entity<Opinion>()
                 .HasOne(o => o.Perro)
                 .WithMany(p => p.Opiniones)
-                .HasForeignKey(o => o.PerroId);
+                .HasForeignKey(o => o.PerroId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Opinion>()
                 .HasOne(o => o.Paseador)
                 .WithMany(p => p.Opiniones)
-                .HasForeignKey(o => o.PaseadorId);
+                .HasForeignKey(o => o.PaseadorId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Opinion>()
+                .HasOne(o => o.Usuario)
+                .WithMany(u => u.Opiniones)
+                .HasForeignKey(o => o.UsuarioId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // Configuración de objetos de valor
+            modelBuilder.Entity<Paseador>().OwnsOne(p => p.Ubicacion);
+            modelBuilder.Entity<Usuario>().OwnsOne(u => u.Dni);
+            modelBuilder.Entity<Usuario>().OwnsOne(u => u.Email);
+            modelBuilder.Entity<Usuario>().OwnsOne(u => u.Telefono);
+            modelBuilder.Entity<Paseador>().OwnsOne(p => p.Dni);
+            modelBuilder.Entity<Paseador>().OwnsOne(p => p.Email);
+            modelBuilder.Entity<Paseador>().OwnsOne(p => p.Telefono);
+
+            // Configuración de propiedades decimales
+            modelBuilder.Entity<Articulo>()
+                .Property(a => a.Precio)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Carrito>()
+                .Property(c => c.PrecioUnitario)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<DetalleFactura>()
+                .Property(d => d.PrecioUnitario)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<DetalleFactura>()
+                .Property(d => d.Subtotal)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Factura>()
+                .Property(f => f.Total)
+                .HasPrecision(10, 2);
+
+            modelBuilder.Entity<Precio>()
+                .Property(p => p.Valor)
+                .HasPrecision(10, 2);
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

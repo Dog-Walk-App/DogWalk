@@ -24,5 +24,6 @@ namespace DogWalk_Domain.Entities
         public ICollection<Factura> Facturas { get; set; } = new List<Factura>();
         public ICollection<Chat> Chats { get; set; } = new List<Chat>();
         public ICollection<Ranking> Rankings { get; set; } = new List<Ranking>();
+        public ICollection<Opinion> Opiniones { get; set; } = new List<Opinion>();
     }
 } 

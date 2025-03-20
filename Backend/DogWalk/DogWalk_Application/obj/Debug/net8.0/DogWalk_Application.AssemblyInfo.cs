@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DogWalk_Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+894ca05080ea7c0162c50d2cd933a0b6e368221d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7f5e524200de58587e493d6909abf7466ee77f1")]
 [assembly: System.Reflection.AssemblyProductAttribute("DogWalk_Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DogWalk_Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,5 +1,6 @@
 using DogWalk_API.Hubs;
 using DogWalk_API.Middleware;
+using DogWalk_Infrastructure;
 using DogWalk_Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -29,6 +30,7 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
     });
 
+
 // Configurar DbContext
 builder.Services.AddDbContext<DogWalkDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -39,6 +41,9 @@ builder.Services.AddDbContext<DogWalkDbContext>(options =>
             maxRetryDelay: TimeSpan.FromSeconds(30),
             errorNumbersToAdd: null);
     }));
+
+// Registrar servicios de infraestructura
+builder.Services.AddInfrastructureServices();
 
 // Configurar CORS
 builder.Services.AddCors(options =>
@@ -148,7 +153,7 @@ else
 }
 
 // Usar middleware personalizado para manejo de errores y respuestas
-app.UseErrorHandler();
+app.UseCustomErrorHandler();
 app.UseApiResponseWrapper();
 
 app.UseHttpsRedirection();

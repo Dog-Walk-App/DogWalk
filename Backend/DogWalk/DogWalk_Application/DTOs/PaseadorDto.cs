@@ -5,11 +5,12 @@ namespace DogWalk_Application.DTOs
         public int Id { get; set; }
         public string Dni { get; set; } = string.Empty;
         public string Nombre { get; set; } = string.Empty;
-        public string Apellidos { get; set; } = string.Empty;
+        public string Apellido { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
         public double ValoracionMedia { get; set; }
+        public double ValoracionGeneral { get; set; }
         public double Latitud { get; set; }
         public double Longitud { get; set; }
         public double Distancia { get; set; }
@@ -54,6 +55,6 @@ namespace DogWalk_Application.DTOs
 
     public class PaseadorWithServiciosDto : PaseadorDto
     {
-        public List<ServicioDto> Servicios { get; set; } = new List<ServicioDto>();
+        public new List<ServicioDto> Servicios { get; set; } = new List<ServicioDto>();
     }
 } 

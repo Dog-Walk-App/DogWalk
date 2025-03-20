@@ -87,7 +87,7 @@ namespace DogWalk_API.Controllers
                     {
                         Id = paseador.Id,
                         Nombre = paseador.Nombre,
-                        Apellidos = paseador.Apellidos,
+                        Apellido = paseador.Apellido,
                         Email = paseador.Email.ToString(),
                         Telefono = paseador.Telefono.ToString(),
                         Direccion = paseador.Direccion,
@@ -174,7 +174,7 @@ namespace DogWalk_API.Controllers
                     {
                         Id = paseador.Id,
                         Nombre = paseador.Nombre,
-                        Apellidos = paseador.Apellidos,
+                        Apellido = paseador.Apellido,
                         Email = paseador.Email.ToString(),
                         Telefono = paseador.Telefono.ToString(),
                         Direccion = paseador.Direccion,
